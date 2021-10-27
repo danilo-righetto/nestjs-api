@@ -1,4 +1,4 @@
-[![nestjs api](nestjs-api.jpg)](https://github.com/danilo-righetto/nestjs-api/)
+[![nestjs api](doc/nestjs-api-thumb.jpg)](https://github.com/danilo-righetto/nestjs-api/)
 
 # NestJS - API
 
