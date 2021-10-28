@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { CreateTodoDTO } from './dto/create-todo.dto';
+import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { CreateTodoDTO, CreateTodoResponseDTO } from './dto/create-todo.dto';
 import { TodoService } from './todo.service';
 
 @Controller('todos')
@@ -7,8 +7,22 @@ export class TodoController {
   constructor(private readonly todoService: TodoService);
 
   @Get()
-  async index() {
-    return await this.todoService.findAll();
+  async index(): Promise<CreateTodoResponseDTO> {
+    try {
+      return {
+        status: 'success',
+        code: HttpStatus.OK,
+        errors: null,
+        result: await this.todoService.findAll(),
+      }
+    } catch (error) {
+      return {
+        status: 'error',
+        code: HttpStatus.INTERNAL_SERVER_ERROR,
+        errors: error,
+        result: [],
+      }
+    }
   }
 
   @Get(':id')
