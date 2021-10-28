@@ -4,6 +4,7 @@ import { TodoController } from './todo.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './../config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Todo } from './entity/todo.entity';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         configService.get('mysqlOptions'),
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([Todo]),
   ],
   providers: [TodoService],
   controllers: [TodoController],
